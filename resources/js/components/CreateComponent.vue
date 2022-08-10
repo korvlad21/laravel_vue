@@ -12,11 +12,13 @@
         <div class="mb-3">
             <input @click.prevent="addPerson"  class="btn btn-primary" value="Добавить">
         </div>
+        <SomeComponent :obj="obj"></SomeComponent>
     </div>
+    
 </template>
 
 <script>
-
+import SomeComponent from "./SomeComponent"
 export default {
     name: "СreateComponent",
     data(){
@@ -24,8 +26,21 @@ export default {
             name:null,
             age:null,
             job:null,
+            obj:{
+                color: 'yellow',
+                number: 50,
+                isPublished: false
+            }
         }
     },
+    mounted(){
+        this.$parent.$refs.index.indexLog()
+    },
+
+    components: {
+        SomeComponent
+    },
+
     methods:{
         addPerson(){
             axios.post('/api/people', {name: this.name, age: this.age, job: this.job})
@@ -33,6 +48,7 @@ export default {
                 this.name=null
                 this.age=null
                 this.job=null
+                this.$parent.$refs.index.getPeople()
             })
         }
     }
