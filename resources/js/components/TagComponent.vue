@@ -1,14 +1,14 @@
 <template>
     <div>
-        SinglePost
+        this is tag component
     </div>
+
 </template>
 
 <script>
-export default{
-    name: "SinglePostComponent"
-}
-    
+    export default {
+        name: "TagComponent"
+    }
 </script>
 <style scoped>
 
