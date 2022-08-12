@@ -1,13 +1,13 @@
 <template>
     <div>
-        this is tag component
+        Show
     </div>
 
 </template>
 
 <script>
     export default {
-        name: "TagComponent"
+        name: "Show"
     }
 </script>
 <style scoped>

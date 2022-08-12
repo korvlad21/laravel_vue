@@ -1,13 +1,13 @@
 <template>
     <div>
-    PostComponent
+        Edit
     </div>
 
 </template>
 
 <script>
     export default {
-        name: "PostComponent"
+        name: "Edit"
     }
 </script>
 <style scoped>
