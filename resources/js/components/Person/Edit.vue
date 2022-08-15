@@ -10,13 +10,18 @@
             <input type="text" v-model="job" placeholder="job" class="form-control">
         </div>
         <div >
-            <input  type="submut" value="Update" class="btn btn-primary">
+            <input @click.prevent="update"  type="submut" value="Update" class="btn btn-primary">
         </div>
     </div>
 
 </template>
 
+
+
 <script>
+
+    import router from '../../router';
+    import axios from 'axios';
     export default {
         name: "Edit",
 
@@ -34,9 +39,18 @@
 
         methods:{
             getPerson(){
-                axios.get('api/people/' + this.$route.params.id)
+                axios.get('/api/people/' + this.$route.params.id)
                 .then(res =>{
-                    console.log(res.data);
+                    this.name=res.data.name
+                    this.age=res.data.age
+                    this.job=res.data.job
+                })
+            },
+
+            update(){
+                axios.patch('/api/people/' + this.$route.params.id, {name: this.name, age:this.age, job:this.job})
+                .then(res =>{
+                    router.push({name:'person.show'})
                 })
             }
         }
