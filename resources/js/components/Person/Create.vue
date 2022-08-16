@@ -10,7 +10,7 @@
             <input type="text" v-model="job" placeholder="job" class="form-control">
         </div>
         <div >
-            <input @click.prevent="store" type="submut" value="Add" class="btn btn-primary">
+            <input :disabled="!isDisabled" @click.prevent="store" type="submut" value="Add" class="btn btn-primary">
         </div>
     </div>
 
@@ -38,6 +38,13 @@ import axios from 'axios';
                 .then(res =>{
                     this.$router.push({name:'person.index'})
                 })
+            },
+
+
+        },
+        computed:{
+            isDisabled(){
+                return this.name && this.age && this.job
             }
         }
     }

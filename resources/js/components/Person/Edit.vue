@@ -10,7 +10,7 @@
             <input type="text" v-model="job" placeholder="job" class="form-control">
         </div>
         <div >
-            <input @click.prevent="update"  type="submut" value="Update" class="btn btn-primary">
+            <input :disabled="!isDisabled" @click.prevent="update"  type="submut" value="Update" class="btn btn-primary">
         </div>
     </div>
 
@@ -50,6 +50,11 @@
                 .then(res =>{
                     this.$router.push({name:'person.show', params:{id: this.$route.params.id}})
                 })
+            }
+        },
+        computed:{
+            isDisabled(){
+                return this.name && this.age && this.job
             }
         }
     }
