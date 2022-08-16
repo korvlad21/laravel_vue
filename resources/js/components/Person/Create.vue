@@ -18,7 +18,6 @@
 
 <script>
 
-import router from '../../router';
 import axios from 'axios';
 
     export default {
@@ -32,12 +31,12 @@ import axios from 'axios';
             }
         },
 
-        
+
         methods: {
             store(){
                 axios.post('/api/people', {name: this.name, age:this.age, job:this.job})
                 .then(res =>{
-                    router.push({name:'person.index'})
+                    this.$router.push({name:'person.index'})
                 })
             }
         }
