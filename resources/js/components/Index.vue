@@ -2,14 +2,29 @@
     <div>
         <router-link :to="{ name:'person.index' }">People</router-link>
         <router-link :to="{ name:'person.create' }">Add</router-link>
-        <router-view></router-view> 
+        <router-view></router-view>
+
     </div>
 
 </template>
 
 <script>
     export default {
-        name: "Index"
+        name: "Index",
+        data(){
+            return{
+                name: 'Bob'
+            }
+        },
+
+
+
+
+    mounted(){
+
+    },
+
+
     }
 </script>
 <style scoped>

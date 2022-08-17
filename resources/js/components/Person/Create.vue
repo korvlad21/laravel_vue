@@ -9,7 +9,7 @@
         <div class="mb-3">
             <input type="text" v-model="job" placeholder="job" class="form-control">
         </div>
-        <div >
+        <div class="mb-3">
             <input :disabled="!isDisabled" @click.prevent="store" type="submut" value="Add" class="btn btn-primary">
         </div>
     </div>
@@ -31,6 +31,10 @@ import axios from 'axios';
             }
         },
 
+        destroy(){
+            this.someLog()
+        },
+
 
         methods: {
             store(){
@@ -39,6 +43,9 @@ import axios from 'axios';
                     this.$router.push({name:'person.index'})
                 })
             },
+            someLog(){
+                console.log(1111);
+            }
 
 
         },
