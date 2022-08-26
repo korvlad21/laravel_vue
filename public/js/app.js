@@ -5512,12 +5512,30 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../router */ "./resources/js/router.js");
+function _objectDestructuringEmpty(obj) { if (obj == null) throw new TypeError("Cannot destructure undefined"); }
+
+
+
 var state = {
-  person: null
+  person: {
+    name: null,
+    age: null,
+    job: null
+  },
+  people: null
 };
 var getters = {
   person: function person() {
     return state.person;
+  },
+  people: function people() {
+    return state.people;
+  },
+  isDisabled: function isDisabled() {
+    return state.person.name && state.person.age && state.person.job;
   }
 };
 var actions = {
@@ -5525,15 +5543,59 @@ var actions = {
     var state = _ref.state,
         commit = _ref.commit,
         dispatch = _ref.dispatch;
-    axios.get("/api/people/".concat(id)).then(function (res) {
+    axios__WEBPACK_IMPORTED_MODULE_0___default().get("/api/people/".concat(id)).then(function (res) {
       commit('setPerson', res.data.data);
       console.log(res);
+    });
+  },
+  getPeople: function getPeople(_ref2) {
+    var commit = _ref2.commit;
+    axios__WEBPACK_IMPORTED_MODULE_0___default().get('/api/people').then(function (res) {
+      commit('setPeople', res.data.data);
+    });
+  },
+  deletePerson: function deletePerson(_ref3, id) {
+    var dispatch = _ref3.dispatch;
+    axios__WEBPACK_IMPORTED_MODULE_0___default()["delete"]("/api/people/".concat(id)).then(function (res) {
+      dispatch('getPeople');
+    });
+  },
+  update: function update(_ref4, data) {
+    _objectDestructuringEmpty(_ref4);
+
+    axios__WEBPACK_IMPORTED_MODULE_0___default().patch("/api/people/".concat(data.id), {
+      name: data.name,
+      age: data.age,
+      job: data.job
+    }).then(function (res) {
+      _router__WEBPACK_IMPORTED_MODULE_1__["default"].push({
+        name: 'person.show',
+        params: {
+          id: data.id
+        }
+      });
+    });
+  },
+  store: function store(_ref5, data) {
+    _objectDestructuringEmpty(_ref5);
+
+    axios__WEBPACK_IMPORTED_MODULE_0___default().post('/api/people', {
+      name: data.name,
+      age: data.age,
+      job: data.job
+    }).then(function (res) {
+      _router__WEBPACK_IMPORTED_MODULE_1__["default"].push({
+        name: 'person.index'
+      });
     });
   }
 };
 var mutations = {
   setPerson: function setPerson(state, person) {
     state.person = person;
+  },
+  setPeople: function setPeople(state, people) {
+    state.people = people;
   }
 };
 /* harmony default export */ const __WEBPACK_DEFAULT_EXPORT__ = ({
